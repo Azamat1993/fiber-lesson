@@ -33,11 +33,19 @@
     });
 
     function doJob() {
-      while(i < n) {
+      var j = 0;
+      while (i < n && j < 100) {
+        j++;
+        i++;
         console.log(i++);
       }
-      text.textContent = 'finished!';
-      i = 0;
+
+      if (i >= n) {
+        text.textContent = 'finished!';
+        i = 0;
+      } else {
+        setTimeout(doJob, 0);
+      }
     }
   </script>
 </html>
