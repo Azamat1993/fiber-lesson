@@ -33,18 +33,19 @@
     });
 
     function doJob() {
-      var j = 0;
-      while (i < n && j < 100) {
-        j++;
-        i++;
+      requestIdleCallback(performWork);
+    }
+
+    function performWork(deadline) {
+      while (i < n && deadline.timeRemaining() > 1) {
         console.log(i++);
       }
 
-      if (i >= n) {
-        text.textContent = 'finished!';
-        i = 0;
+      if (i < n) {
+        requestIdleCallback(performWork);
       } else {
-        setTimeout(doJob, 0);
+        i = 0;
+        text.textContent = 'finished!';
       }
     }
   </script>
