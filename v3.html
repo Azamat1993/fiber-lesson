@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      div {
+        width: 100px;
+        height: 100px;
+        background: red;
+        position: relative;
+
+        animation: mymove 3s infinite;
+      }
+
+      @keyframes mymove {
+        from {left: 0px;}
+        to {left: 200px;}
+      }
+    </style>
+  </head>
+  <body>
+    <div></div>
+    <p id="text"></p>
+    <button id="start">Start</button>
+  </body>
+  <script>
+    var text = document.getElementById('text');
+    var button = document.getElementById('start');
+    var i = 0;
+    var n = 10000;
+
+    button.addEventListener('click', function() {
+      doJob();
+    });
+
+    function doJob() {
+      requestIdleCallback(performWork);
+    }
+
+    function performWork(deadline) {
+      while (i < n && deadline.timeRemaining() > 1) {
+        console.log(i++);
+      }
+
+      if (i < n) {
+        requestIdleCallback(performWork);
+      } else {
+        i = 0;
+        text.textContent = 'finished!';
+      }
+    }
+  </script>
+</html>
