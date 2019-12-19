@@ -20,19 +20,21 @@
   <body>
     <div></div>
     <p id="text"></p>
+    <input type="number" value="100" id="input"/>
     <button id="start">Start</button>
   </body>
   <script>
     var text = document.getElementById('text');
     var button = document.getElementById('start');
     var i = 0;
-    var n = 10000;
+    var n;
 
     button.addEventListener('click', function() {
       doJob();
     });
 
     function doJob() {
+      n = input.value;
       requestIdleCallback(performWork);
     }
 
