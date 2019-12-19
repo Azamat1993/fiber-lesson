@@ -33,8 +33,11 @@
     });
 
     function doJob() {
-      var j = 0;
-      while (i < n && (j++) < 100) {
+      requestIdleCallback(performWork);
+    }
+
+    function performWork(deadline) {
+      while (i < n && deadline.timeRemaining() > 1) {
         console.log(i++);
       }
 
